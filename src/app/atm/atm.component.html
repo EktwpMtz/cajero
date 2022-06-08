@@ -1,0 +1,42 @@
+<div class="atm">
+    <div id=status>
+        <h3>Status del cajero</h3>
+        <hr>
+        <table>
+            <thead>
+                <td>N° de billetes</td>
+                <td>Denominación</td>
+                <td>Valor acumulado</td>
+            </thead>
+            <tbody>
+                <tr *ngFor="let billete of efectivo">
+                    <td>{{ billete.cantidad }}</td>
+                    <td>${{ billete.valor }}</td>
+                    <td>${{ billete.cantidad * billete.valor }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <td colspan="2">Total</td>
+                <td>${{ valorBilletes(efectivo) }}</td>
+            </tfoot>
+        </table>
+    </div>
+    <div>
+        <h3>Retiro</h3>
+        <hr>
+        <div class="field">
+            <label>Cantidad a retirar: </label>
+            <input type="number" [(ngModel)]="monto" (input)="validarInput($event)">
+        </div>
+        <button (click)="retirar()">Retirar</button>
+    </div>
+    <div>
+        <h3>Deposito</h3>
+        <hr>
+        <div class="field" *ngFor="let billete of efectivo; let i = index">
+            <label>Billetes de ${{ billete.valor }}: </label>
+            <input type="number" [(ngModel)]="deposito[i].cantidad">
+        </div>
+        <button (click)="depositar()">Depositar</button>
+    </div>
+</div>
